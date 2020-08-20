@@ -19,11 +19,15 @@ export default function (el, binding) {
   // passing parameters as object
   if (typeof binding.value === 'object') {
     const value = binding.value
+    console.log(JSON.stringify(value));
     if (value.category) args.push(value.category)
     if (value.action) args.push(value.action)
     if (value.label) args.push(value.label)
     if (value.value) args.push(value.value)
-    if (value.nodeid) args.push(value.nodeid)
+    if (value.nodeid){
+      console.log("nodeid"+value.nodeid)
+      args.push(value.nodeid)
+    } 
 
     // passing parameters as string separate by comma
   } else if (typeof binding.value === 'string') {

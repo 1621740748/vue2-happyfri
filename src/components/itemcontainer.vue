@@ -54,8 +54,9 @@ export default {
   			if (this.choosedNum !== null) {
 				this.choosedNum = null;
 			//	this.itemId=itemNum;
+			   this.$data.itemId=this.$store.state.itemNum;
 	  			//保存答案, 题目索引加一，跳到下一题
-				this.addNum(this.choosedId)
+				this.addNum(this.choosedId);
 				  
   			}else{
   				alert('您还没有选择答案哦')
