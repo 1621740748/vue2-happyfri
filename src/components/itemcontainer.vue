@@ -23,6 +23,7 @@
     		<span class="next_item button_style" @click="nextItem" v-if="itemNum < itemDetail.length"></span>
     		<span class="submit_item button_style" v-else @click="submitAnswer"></span>
     	</div>
+		<div v-track-pageview="'/tar, https://www.jrj.com.cn/12333333333333555555'"></div> 
   	</section>
 </template>
 
