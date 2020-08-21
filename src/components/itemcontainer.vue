@@ -20,8 +20,8 @@
     				</ul>
     			</div>
     		</div>
-    		<span class="next_item button_style" @click="nextItem" v-if="itemNum < itemDetail.length" v-track-event="{category:itemNum}" ></span>
-    		<span class="submit_item button_style" v-else @click="submitAnswer" v-track-event="{category:itemNum}" ></span>
+    		<span class="next_item button_style" @click="nextItem" v-if="itemNum < itemDetail.length" v-track-event="{category:'aaa',nodeid:itemNum}"></span>
+    		<span class="submit_item button_style" v-else @click="submitAnswer" v-track-event="{category:'aaa',nodeid:itemNum}" ></span>
     	</div>
 	
   	</section>
