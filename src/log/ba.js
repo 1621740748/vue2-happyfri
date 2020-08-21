@@ -1,4 +1,4 @@
-import uweb from './index'
+import ba from './index'
 import Vue from 'vue'
 var options = {
   'siteId': '1261414301',
@@ -7,4 +7,4 @@ var options = {
   'debug': true
 }
 
-Vue.use(uweb, options)
+Vue.use(ba, options)

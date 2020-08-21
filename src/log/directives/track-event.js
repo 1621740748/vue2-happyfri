@@ -1,53 +1,38 @@
-import uweb from '../index'
-import { notChanged, isEmpty } from './util'
+import ba from '../index'
+import { notChanged, isEmpty } from './utils'
 
-export default function (el, binding) {
-  if (notChanged(binding) || isEmpty(binding)) return
-
-  if (el.removeEventListeners && typeof el.removeEventListeners === 'function') {
-    el.removeEventListeners()
+export default function (el, binding, vnode) {
+  if (notChanged(binding) || isEmpty(binding)) {
+    return
   }
 
   let args = []
-  // use modifier as events
-  const events = Object.keys(binding.modifiers).map(modifier => {
+  let events = Object.keys(binding.modifiers).map(modifier => {
     if (binding.modifiers[modifier]) {
       return modifier
     }
   })
 
-  // passing parameters as object
   if (typeof binding.value === 'object') {
-    const value = binding.value
-    console.log(JSON.stringify(value));
+    let value = binding.value
     if (value.category) args.push(value.category)
     if (value.action) args.push(value.action)
-    if (value.label) args.push(value.label)
-    if (value.value) args.push(value.value)
-    if (value.nodeid){
-      console.log("nodeid"+value.nodeid)
-      args.push(value.nodeid)
-    } 
-
-    // passing parameters as string separate by comma
+    if (value.opt_label) args.push(value.opt_label)
+    if (value.opt_value) args.push(value.opt_value)
   } else if (typeof binding.value === 'string') {
     args = binding.value.split(',')
     args.forEach((arg, i) => (args[i] = arg.trim()))
   }
 
-  if (!events.length) events.push('click') // listen click event by default
+  if (!events.length) events.push('click') // default  listen click
 
-  // addEventListener for each event, call trackEvent api
-  const listeners = []
-  events.forEach((event, index) => {
-    listeners[index] = () => uweb.trackEvent(...args)
-    el.addEventListener(event, listeners[index], false)
+  events.forEach((eventValue) => {
+    const customTag = 'custom'
+    let [event, custom] = eventValue.split(':')
+    if (custom === customTag) {
+      vnode.componentInstance.$on(event, () => ba.trackEvent(...args), false)
+    } else {
+      el.addEventListener(event, () => ba.trackEvent(...args), false)
+    }
   })
-
-  // a function to remove all previous event listeners in update cycle to prevent duplication
-  el.removeEventListeners = () => {
-    events.forEach((event, index) => {
-      el.removeEventListener(event, listeners[index])
-    })
-  }
 }

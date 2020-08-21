@@ -20,17 +20,17 @@
     				</ul>
     			</div>
     		</div>
-    		<span class="next_item button_style" @click="nextItem" v-if="itemNum < itemDetail.length" v-track-event="{nodeid:itemId}" ></span>
+    		<span class="next_item button_style" @click="nextItem" v-if="itemNum < itemDetail.length" v-track-event="{category:itemNum}" ></span>
     		<span class="submit_item button_style" v-else @click="submitAnswer" v-track-event="'category, action, label, value, nodeid'" ></span>
     	</div>
-		<div v-track-pageview="'/tar, https://www.jrj.com.cn/12333333333333555555'"></div> 
+	
   	</section>
 </template>
 
 <script>
 import { mapState, mapActions } from 'vuex'
 export default {
-	name: 'itemcontainer',
+	name: 'itemcontainer',s
 	data() {
 		return {
 			itemId: null, //题目ID
@@ -54,7 +54,7 @@ export default {
   			if (this.choosedNum !== null) {
 				this.choosedNum = null;
 			//	this.itemId=itemNum;
-			   this.$data.itemId=this.$store.state.itemNum;
+			   //this.$data.itemId=this.$store.state.itemNum;
 	  			//保存答案, 题目索引加一，跳到下一题
 				this.addNum(this.choosedId);
 				  
