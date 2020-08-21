@@ -25,14 +25,17 @@ export default function (el, binding, vnode) {
   }
 
   if (!events.length) events.push('click') // default  listen click
-
+  console.log("-------------1111-----------------")
   events.forEach((eventValue) => {
-    const customTag = 'custom'
-    let [event, custom] = eventValue.split(':')
-    if (custom === customTag) {
-      vnode.componentInstance.$on(event, () => ba.trackEvent(...args), false)
-    } else {
-      el.addEventListener(event, () => ba.trackEvent(...args), false)
-    }
+    // const customTag = 'custom'
+    // let [event, custom] = eventValue.split(':')
+    // if (custom === customTag) {
+    //   vnode.componentInstance.$on(event, () => ba.trackEvent(...args), false)
+    // } else {
+    //   el.addEventListener(event, () => ba.trackEvent(...args), false)
+    // }
+
+    ba.trackEvent(...args)
+
   })
 }
