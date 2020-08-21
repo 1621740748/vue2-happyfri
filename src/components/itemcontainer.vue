@@ -30,7 +30,7 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 export default {
-	name: 'itemcontainer',s
+	name: 'itemcontainer',
 	data() {
 		return {
 			itemId: null, //题目ID
